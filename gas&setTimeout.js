@@ -3,12 +3,12 @@ const axios = require('axios');
 
 const server = new StellarSdk.Server('https://api.mainnet.minepi.com');
 
-const senderSecret = 'SDTHEWHZY2O63Q7TL4ZT4C7XSSYBZ3UOHHSFUNWCJZNLXN23JLIUZL';
+const senderSecret = 'SDEWKP36AFA4LOB5YKZJMWFOXZIJ5RQJ6BSDVSCAFY5OMTJILLYDW4SD';
 const senderKeypair = StellarSdk.Keypair.fromSecret(senderSecret);
 const senderPublic = senderKeypair.publicKey();
 
 const apiUrl = `https://api.mainnet.minepi.com/accounts/${senderPublic}`;
-const recipient = 'GB2RKMV7GHGFSSIDQSVUZXZ4IEFDD2EPWA6V4FBH3ERGVZEZSWPEOJPP';
+const recipient = 'GD2E7TJ62WCVTPYORLVLG4QP3VWGDJA2VMUOZSIQOITKSZRJCSFFNSCG';
 
 async function sendPi() {
   try {

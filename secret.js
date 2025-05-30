@@ -23,5 +23,5 @@ async function getPiWalletAddressFromSeed(mnemonic) {
 }
 
 // Replace with your actual 24-word Pi seed phrase
-const mnemonic = "few announce apple deliver pioneer regular dice someone enrich festival soccer rice critic quiz pride venue boil corn angle piano sugar pioneer grocery save";
+const mnemonic = "model thank pet stone hello better always kingdom once mountain yellow belt vintage layer father soda jewel cross rich oyster vast upset narrow figure";
 getPiWalletAddressFromSeed(mnemonic);

