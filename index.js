@@ -52,17 +52,17 @@ async function sendPi(po) {
 // Send every 3 seconds
 setInterval(() => {
     sendPi("Hi1");
-}, 3000);
+}, 1000);
 
 
 // Send every 3 seconds
 setInterval(() => {
     sendPi("hi2");
-}, 1000);
+}, 2000);
 
-// setInterval(() => {
-//     sendPi("Hi3");
-// }, 3000);
+setInterval(() => {
+    sendPi("Hi3");
+}, 3000);
 
 
 // // Send every 3 seconds
