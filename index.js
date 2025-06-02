@@ -23,7 +23,7 @@ async function sendPi(po) {
         console.log(`Pi Balance : ${res.data.balances[0].balance}`);
 
         // const withdrawAmount = Number(amount1) - Number("0.01")
-         const withdrawAmount = Number("2.5");
+         const withdrawAmount = Number("1200");
         console.log(`Withdraw Amount: ${withdrawAmount}`);
         console.log(typeof withdrawAmount.toString())
 
