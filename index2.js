@@ -60,12 +60,12 @@ const StellarSdk = require('stellar-sdk');
 const server = new StellarSdk.Server('https://api.mainnet.minepi.com');
 
 // ✅ নিজের Sender Secret দিয়ে বদলান (সাবধান!)
-const senderSecret = 'SD36W5FSBJ2VBRNKEBMWZH3LJSLCYXHKKRDSLXYCI44DIJUSNWPQHNLT'; 
+const senderSecret = 'SCAWOFIUAXPE5WAWQPI7CAQMUAG7UDMOTWN4QKHHGM6FCEKUSTVPZRBW'; 
 const senderKeypair = StellarSdk.Keypair.fromSecret(senderSecret);
 const senderPublic = senderKeypair.publicKey();
 
 // ✅ Receiver Account
-const recipient = 'GA4UDWS5GKMDCD7EQKK3ST7MJ3BFNHW4Z3KYS26GLUKD764TJA46QDDI';
+const recipient = 'GBZYBTPIUTVPAX4GIAWH5YEM5ZINPBEABDFSS46PE443XYRAVB7D6ENT';
 
 // Helper: Delay
 function sleep(ms) {
@@ -92,7 +92,7 @@ async function sendBatchTransactions() {
                 .addOperation(StellarSdk.Operation.payment({
                     destination: recipient,
                     asset: StellarSdk.Asset.native(),
-                    amount: "0.001", // Small amount for test
+                    amount: "290", // Small amount for test
                 }))
                 .setTimeout(30)
                 .build();
@@ -107,7 +107,7 @@ async function sendBatchTransactions() {
                 console.error(`❌ Tx ${i} FAILED -`, msg);
             }
 
-            await sleep(300); // Delay between transactions to avoid rate-limiting
+            await sleep(30); // Delay between transactions to avoid rate-limiting
         }
 
     } catch (err) {
