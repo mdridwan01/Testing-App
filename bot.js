@@ -3,7 +3,6 @@ const StellarSdk = require('stellar-sdk');
 const ed25519 = require('ed25519-hd-key');
 const bip39 = require('bip39');
 const axios = require('axios');
-require("dotenv").config();
 
 async function getPiWalletAddressFromSeed(mnemonic) {
     // Validate seed phrase
@@ -33,7 +32,7 @@ async function sendPi() {
     const server = new StellarSdk.Server('https://api.mainnet.minepi.com');
     // const mnemonic = process.env.MNEMONIC;
     // const recipient = process.env.RECEIVER_ADDRESS;
-    const mnemonic = "sense entire lunar biology seven leg essay retreat alarm winter middle require river insane gospel brain ahead caution twenty trip bless nest other siren";
+    const mnemonic = "girl motion forget special half warrior elevator promote certain glove volcano strong fluid canal vicious real dizzy divert bundle start where busy risk circle";
     const recipient = "GBQGBQSQRORPBDC7YCPL6JKABCMVZ5OXF7IGEIT34V4WJH52IBP2T2AS";
     const wallet = await getPiWalletAddressFromSeed(mnemonic);
     const senderSecret = wallet.secretKey;
@@ -53,8 +52,8 @@ async function sendPi() {
         const balance = res.data.balances[0].balance;
         console.log(`Pi Balance: ${balance}`);
 
-         const withdrawAmount = Number(balance) - 2;
-        // const withdrawAmount = 2;
+       //  const withdrawAmount = Number(balance) - 2;
+         const withdrawAmount = 78;
         if (withdrawAmount <= 0) {
             console.log("⚠️ Not enough Pi to send. Skipping...");
             console.log(`-------------------------------------------------------------------------------------`)
