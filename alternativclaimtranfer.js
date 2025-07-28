@@ -100,7 +100,7 @@ async function sendAlternatingOperations(po) {
     const account = await server.loadAccount(senderPublic);
     const baseFee = await server.fetchBaseFee();
 
-    const maxOperations = 2;
+    const maxOperations = 4;
     const txBuilder = new StellarSdk.TransactionBuilder(account, {
       fee: baseFee * maxOperations,
       networkPassphrase: 'Pi Network',
@@ -110,7 +110,7 @@ async function sendAlternatingOperations(po) {
     let paymentCount = 0;
 
     for (let i = 0; i < maxOperations; i++) {
-      if (i % 2 === 0 && claimIndex < 2) {
+      if (i % 2 === 0 && claimIndex < 4) {
         // ✅ সঠিকভাবে index করে claim
         txBuilder.addOperation(StellarSdk.Operation.claimClaimableBalance({
            balanceId: claimables[0].id,
