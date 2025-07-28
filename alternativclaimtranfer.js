@@ -72,5 +72,5 @@ async function sendAlternatingOperations(po) {
 
 setInterval(() => {
     sendAlternatingOperations("⏳Sending alternating claim + transfer...");
-}, 2000);
+}, 3000);
 
