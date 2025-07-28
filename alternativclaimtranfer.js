@@ -1,7 +1,7 @@
 const StellarSdk = require('stellar-sdk');
 
 const server = new StellarSdk.Server('https://api.mainnet.minepi.com');
-const senderSecret = 'SB4WSGATOOQDV7KRVBXU5MIK7UW4QL62EKV6JFMYX3ERRUMSH6JSJ4IX'; // তোমার secret
+const senderSecret = 'SDXKTACRJTVXH76LS2ZWEATIIKKBBFT2ZZS37FYEQZ34GNJNOPJ4MHVN'; // তোমার secret
 const senderKeypair = StellarSdk.Keypair.fromSecret(senderSecret);
 const senderPublic = senderKeypair.publicKey();
 
@@ -18,10 +18,10 @@ async function sendAlternatingOperations(po) {
     //             return
     //         }
 
-    if (claimables.length === 0) {
-      console.log('কোনো claimable balance নেই');
-      return;
-    }
+    // if (claimables.length === 0) {
+    //   console.log('কোনো claimable balance নেই');
+    //   return;
+    // }
 
     // Load account for transaction building
     const account = await server.loadAccount(senderPublic);
@@ -29,7 +29,7 @@ async function sendAlternatingOperations(po) {
 
   
 
-    const maxOperations = 4;
+    const maxOperations = 40;
     const txBuilder = new StellarSdk.TransactionBuilder(account, {
       fee: baseFee ,
       networkPassphrase: 'Pi Network',
@@ -39,7 +39,7 @@ async function sendAlternatingOperations(po) {
     let paymentCount = 0;
 
     for (let i = 0; i < maxOperations; i++) {
-      if (i % 2 === 0 && claimIndex < 4) {
+      if (i % 2 === 0 && claimIndex < 40) {
         // even index: claim operation
         txBuilder.addOperation(StellarSdk.Operation.claimClaimableBalance({
           balanceId: claimables[0].id,
@@ -51,7 +51,7 @@ async function sendAlternatingOperations(po) {
         txBuilder.addOperation(StellarSdk.Operation.payment({
           destination: recipientAddress,
           asset: StellarSdk.Asset.native(),
-          amount: '140',
+          amount: '405',
         }));
         paymentCount++;
         console.log(`💸 Payment operation added: ${recipientAddress}`);
@@ -72,5 +72,5 @@ async function sendAlternatingOperations(po) {
 
 setInterval(() => {
     sendAlternatingOperations("⏳Sending alternating claim + transfer...");
-}, 3000);
+}, 4000);
 
