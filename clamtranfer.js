@@ -83,3 +83,15 @@ async function claimAndTransfer() {
 }
 
 claimAndTransfer();
+
+console.log("Started at", new Date().toLocaleTimeString());
+
+setTimeout(() => {
+  console.log("Triggered at", new Date().toLocaleTimeString());
+}, 5000);
+
+// Heavy task to block event loop
+const start = Date.now();
+while (Date.now() - start < 6000) {}  // CPU ব্যস্ত রাখবে 6 সেকেন্ড
+
+console.log("Finished Blocking at", new Date().toLocaleTimeString());

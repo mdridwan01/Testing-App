@@ -1,11 +1,18 @@
 const StellarSdk = require('stellar-sdk');
 
 const server = new StellarSdk.Server('https://api.mainnet.minepi.com');
-const senderSecret = 'SDXKTACRJTVXH76LS2ZWEATIIKKBBFT2ZZS37FYEQZ34GNJNOPJ4MHVN'; // তোমার secret
+const senderSecret = 'SAYTGOPIMJSPEF4MKLMMPA76NILEEQWLVWOJDAMG3UWH6B63F2DMTTKU'; // তোমার secret
 const senderKeypair = StellarSdk.Keypair.fromSecret(senderSecret);
 const senderPublic = senderKeypair.publicKey();
 
 const recipientAddress = 'GA4UDWS5GKMDCD7EQKK3ST7MJ3BFNHW4Z3KYS26GLUKD764TJA46QDDI';
+
+
+// na pawar 2 ta karon 
+// 1. operation er somoy 0.40 sen silo na tai kaj kore nai onno bot kheye felse 0.80 sen. == sulation fee komate hobe.
+// 2. correct time e run korte hobe.
+// 3. server first lagbe.
+
 
 async function sendAlternatingOperations(po) {
   console.log(po);
@@ -29,7 +36,7 @@ async function sendAlternatingOperations(po) {
 
   
 
-    const maxOperations = 40;
+    const maxOperations = 2;
     const txBuilder = new StellarSdk.TransactionBuilder(account, {
       fee: baseFee ,
       networkPassphrase: 'Pi Network',
@@ -51,14 +58,14 @@ async function sendAlternatingOperations(po) {
         txBuilder.addOperation(StellarSdk.Operation.payment({
           destination: recipientAddress,
           asset: StellarSdk.Asset.native(),
-          amount: '405',
+          amount: '90',
         }));
         paymentCount++;
         console.log(`💸 Payment operation added: ${recipientAddress}`);
       }
     }
 
-    const tx = txBuilder.setTimeout(60).build();
+    const tx = txBuilder.setTimeout(30).build();
     tx.sign(senderKeypair);
 
     const result = await server.submitTransaction(tx);
@@ -72,5 +79,5 @@ async function sendAlternatingOperations(po) {
 
 setInterval(() => {
     sendAlternatingOperations("⏳Sending alternating claim + transfer...");
-}, 4000);
+}, 3000);
 
