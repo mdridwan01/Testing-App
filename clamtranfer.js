@@ -2,7 +2,7 @@ const stellar = require("@stellar/stellar-sdk");
 
 const server = new stellar.Horizon.Server("https://api.mainnet.minepi.com");
 
-const senderSecret = "SDXKTACRJTVXH76LS2ZWEATIIKKBBFT2ZZS37FYEQZ34GNJNOPJ4MHVN";
+const senderSecret = "SDAEHJMUPG4ZXAPT6TXCMBPMAB6GJ7WA4CF2GUJBAUYZGGU7J6AG3OSK";
 const receiverPublicKey = "GBQGBQSQRORPBDC7YCPL6JKABCMVZ5OXF7IGEIT34V4WJH52IBP2T2AS";
 
 const senderKeypair = stellar.Keypair.fromSecret(senderSecret);

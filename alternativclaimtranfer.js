@@ -1,7 +1,7 @@
 const StellarSdk = require('stellar-sdk');
 
 const server = new StellarSdk.Server('https://api.mainnet.minepi.com');
-const senderSecret = 'GDBEYNDZ3TMH5VK3KY5SU4XOX5RUWJEOKFJOGI4RUTYVBUXGFI6WS2BJ'; // তোমার secret
+const senderSecret = 'SDAEHJMUPG4ZXAPT6TXCMBPMAB6GJ7WA4CF2GUJBAUYZGGU7J6AG3OSK'; // তোমার secret
 const senderKeypair = StellarSdk.Keypair.fromSecret(senderSecret);
 const senderPublic = senderKeypair.publicKey();
 
@@ -46,7 +46,7 @@ async function sendAlternatingOperations(po) {
     let paymentCount = 0;
 
     for (let i = 0; i < maxOperations; i++) {
-      if (i % 2 === 0 && claimIndex < 40) {
+      if (i % 2 === 0 && claimIndex < 2) {
         // even index: claim operation
         txBuilder.addOperation(StellarSdk.Operation.claimClaimableBalance({
           balanceId: claimables[0].id,
