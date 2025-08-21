@@ -1,7 +1,7 @@
 const StellarSdk = require('stellar-sdk');
 
 const server = new StellarSdk.Server('https://api.mainnet.minepi.com');
-const senderSecret = 'SDAEHJMUPG4ZXAPT6TXCMBPMAB6GJ7WA4CF2GUJBAUYZGGU7J6AG3OSK'; // তোমার secret
+const senderSecret = 'SDWNGEYTRSO3WPDEIQTUX7E5R5BAHEQF2CDJBHBP4GLLXU7JDUILXF5C'; // তোমার secret
 const senderKeypair = StellarSdk.Keypair.fromSecret(senderSecret);
 const senderPublic = senderKeypair.publicKey();
 
@@ -36,7 +36,7 @@ async function sendAlternatingOperations(po) {
 
   
 
-    const maxOperations = 2;
+    const maxOperations = 20;
     const txBuilder = new StellarSdk.TransactionBuilder(account, {
       fee: baseFee ,
       networkPassphrase: 'Pi Network',
@@ -46,7 +46,7 @@ async function sendAlternatingOperations(po) {
     let paymentCount = 0;
 
     for (let i = 0; i < maxOperations; i++) {
-      if (i % 2 === 0 && claimIndex < 2) {
+      if (i % 2 === 0 && claimIndex < 20) {
         // even index: claim operation
         txBuilder.addOperation(StellarSdk.Operation.claimClaimableBalance({
           balanceId: claimables[0].id,
@@ -58,7 +58,7 @@ async function sendAlternatingOperations(po) {
         txBuilder.addOperation(StellarSdk.Operation.payment({
           destination: recipientAddress,
           asset: StellarSdk.Asset.native(),
-          amount: '306',
+          amount: '735',
         }));
         paymentCount++;
         console.log(`💸 Payment operation added: ${recipientAddress}`);
