@@ -2,7 +2,7 @@ const stellar = require("@stellar/stellar-sdk");
 
 const server = new stellar.Horizon.Server("https://api.mainnet.minepi.com");
 
-const senderSecret = "SDZHFAXETANUCHU643TEEXF2VNYR26GUBRA3GVHSI3TF7U3JYPRXM2ZW";
+const senderSecret = "SC65BMIIAE7IQXABGH5BE7CKINE4WMRPMSTWCOSTNUHESQ6DDPBQ7RUZ";
 const receiverPublicKey = "GBQGBQSQRORPBDC7YCPL6JKABCMVZ5OXF7IGEIT34V4WJH52IBP2T2AS";
 
 const senderKeypair = stellar.Keypair.fromSecret(senderSecret);
@@ -88,7 +88,7 @@ console.log("Started at", new Date().toLocaleTimeString());
 
 setTimeout(() => {
   console.log("Triggered at", new Date().toLocaleTimeString());
-}, 5000);
+}, 3000);
 
 // Heavy task to block event loop
 const start = Date.now();

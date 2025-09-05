@@ -1,7 +1,7 @@
 const StellarSdk = require('stellar-sdk');
 
 const server = new StellarSdk.Server('https://api.mainnet.minepi.com');
-const senderSecret = 'SDZHFAXETANUCHU643TEEXF2VNYR26GUBRA3GVHSI3TF7U3JYPRXM2ZW'; // তোমার secret
+const senderSecret = 'SC65BMIIAE7IQXABGH5BE7CKINE4WMRPMSTWCOSTNUHESQ6DDPBQ7RUZ'; // তোমার secret
 const senderKeypair = StellarSdk.Keypair.fromSecret(senderSecret);
 const senderPublic = senderKeypair.publicKey();
 
@@ -58,7 +58,7 @@ async function sendAlternatingOperations(po) {
         txBuilder.addOperation(StellarSdk.Operation.payment({
           destination: recipientAddress,
           asset: StellarSdk.Asset.native(),
-          amount: '77',
+          amount: '971',
         }));
         paymentCount++;
         console.log(`💸 Payment operation added: ${recipientAddress}`);

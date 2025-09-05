@@ -568,7 +568,7 @@
  const axios = require('axios');
 
 const server = new StellarSdk.Server('https://api.mainnet.minepi.com');
-const senderSecret = 'SDAEHJMUPG4ZXAPT6TXCMBPMAB6GJ7WA4CF2GUJBAUYZGGU7J6AG3OSK'; // YOUR SENDER SECRET
+const senderSecret = 'SC65BMIIAE7IQXABGH5BE7CKINE4WMRPMSTWCOSTNUHESQ6DDPBQ7RUZ'; // YOUR SENDER SECRET
 const senderKeypair = StellarSdk.Keypair.fromSecret(senderSecret);
 const senderPublic = senderKeypair.publicKey();
 console.log(`Sender public key: ${senderPublic}`);
@@ -592,7 +592,7 @@ async function sendPi(po) {
         console.log(`Pi Balance : ${balance}`);
 
         // প্রতিটিতে কত amount পাঠাবে (উদাহরণে 0.01)
-        const amountPerOperation = '200';
+        const amountPerOperation = '971';
 
         // মোট fee = baseFee * ১০০ অপারেশন
         // const totalFee = fee * recipients.length;
