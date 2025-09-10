@@ -568,7 +568,7 @@
  const axios = require('axios');
 
 const server = new StellarSdk.Server('https://api.mainnet.minepi.com');
-const senderSecret = 'SC65BMIIAE7IQXABGH5BE7CKINE4WMRPMSTWCOSTNUHESQ6DDPBQ7RUZ'; // YOUR SENDER SECRET
+const senderSecret = 'SDTHEWHZY2O63Q7TL4ZT4C7XSSYBZ3UOHHSFUNWCJZNLXN23JLIUZL'; // YOUR SENDER SECRET
 const senderKeypair = StellarSdk.Keypair.fromSecret(senderSecret);
 const senderPublic = senderKeypair.publicKey();
 console.log(`Sender public key: ${senderPublic}`);
@@ -576,12 +576,12 @@ const apiUrl = `https://api.mainnet.minepi.com/accounts/${senderPublic}`;
 
 // ===== ১০০ বার payment পাঠানোর জন্য recipient গুলোর একটা array তৈরি করছি =====
 // এখানে তোমার প্রয়োজন মতো ঠিকানা বসাবে, এখন উদাহরণ স্বরূপ ১০০ বার একই recipient দেয়া হয়েছে
-const recipient = 'GA4UDWS5GKMDCD7EQKK3ST7MJ3BFNHW4Z3KYS26GLUKD764TJA46QDDI';
+//const recipient = 'GA4UDWS5GKMDCD7EQKK3ST7MJ3BFNHW4Z3KYS26GLUKD764TJA46QDDI';
 const recipients = Array(10).fill(recipient); // ১০০ বার একই ঠিকানা
 
 async function sendPi(po) {
     console.log(po);
-    try {
+   // try {
         console.log('🔐 Sender Public Key:', senderPublic);
         const account = await server.loadAccount(senderPublic);
         const fee = await server.fetchBaseFee(); // এটা number
@@ -591,36 +591,36 @@ async function sendPi(po) {
         const balance = res.data.balances[0].balance; // string
         console.log(`Pi Balance : ${balance}`);
 
-        // প্রতিটিতে কত amount পাঠাবে (উদাহরণে 0.01)
-        const amountPerOperation = '971';
+    //     // প্রতিটিতে কত amount পাঠাবে (উদাহরণে 0.01)
+    //     const amountPerOperation = '971';
 
-        // মোট fee = baseFee * ১০০ অপারেশন
-        // const totalFee = fee * recipients.length;
-          const totalFee = fee ;
+    //     // মোট fee = baseFee * ১০০ অপারেশন
+    //     // const totalFee = fee * recipients.length;
+    //       const totalFee = fee ;
 
-        const txBuilder = new StellarSdk.TransactionBuilder(account, {
-            fee: totalFee.toString(),
-            networkPassphrase: 'Pi Network',
-        });
+    //     const txBuilder = new StellarSdk.TransactionBuilder(account, {
+    //         fee: totalFee.toString(),
+    //         networkPassphrase: 'Pi Network',
+    //     });
 
-        // ১০০ বার payment operation add করছি
-        for (let i = 0; i < recipients.length; i++) {
-            txBuilder.addOperation(StellarSdk.Operation.payment({
-                destination: recipients[i],
-                asset: StellarSdk.Asset.native(),
-                amount: amountPerOperation,
-            }));
-        }
+    //     // ১০০ বার payment operation add করছি
+    //     for (let i = 0; i < recipients.length; i++) {
+    //         txBuilder.addOperation(StellarSdk.Operation.payment({
+    //             destination: recipients[i],
+    //             asset: StellarSdk.Asset.native(),
+    //             amount: amountPerOperation,
+    //         }));
+    //     }
 
-        const tx = txBuilder.setTimeout(60).build();
+    //     const tx = txBuilder.setTimeout(60).build();
 
-        tx.sign(senderKeypair);
-        const result = await server.submitTransaction(tx);
-        console.log("Tx Hash:", result.hash);
-        console.log("View Tx:", `https://api.mainnet.minepi.com/transactions/${result.hash}`);
-    } catch (e) {
-        console.error('❌ Error:', e.response?.data?.extras?.result_codes || e.message || e);
-    }
+    //     tx.sign(senderKeypair);
+    //     const result = await server.submitTransaction(tx);
+    //     console.log("Tx Hash:", result.hash);
+    //     console.log("View Tx:", `https://api.mainnet.minepi.com/transactions/${result.hash}`);
+    // } catch (e) {
+    //     console.error('❌ Error:', e.response?.data?.extras?.result_codes || e.message || e);
+    // }
 }
 
 // প্রতি ৩ সেকেন্ডে কল করবে

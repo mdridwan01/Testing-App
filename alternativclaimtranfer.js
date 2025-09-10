@@ -1,7 +1,7 @@
 const StellarSdk = require('stellar-sdk');
 
 const server = new StellarSdk.Server('https://api.mainnet.minepi.com');
-const senderSecret = 'SC65BMIIAE7IQXABGH5BE7CKINE4WMRPMSTWCOSTNUHESQ6DDPBQ7RUZ'; // তোমার secret
+const senderSecret = 'SDTHEWHZY2O63Q7TL4ZT4C7XSSYBZ3UOHHSFUNWCJZNLXN23JLIUZL'; // তোমার secret
 const senderKeypair = StellarSdk.Keypair.fromSecret(senderSecret);
 const senderPublic = senderKeypair.publicKey();
 
@@ -16,10 +16,12 @@ const recipientAddress = 'GBQGBQSQRORPBDC7YCPL6JKABCMVZ5OXF7IGEIT34V4WJH52IBP2T2
 
 async function sendAlternatingOperations(po) {
   console.log(po);
-  try {
+  // try {
     // claimableBalances নিয়ে আসা
     const balancesResponse = await server.claimableBalances().claimant(senderPublic).call();
+    console.log(balancesResponse.records[0].claimants[0].account);
     const claimables = balancesResponse.records;
+    console.log("est" + claimables);
     // if (balances.records.length === 0) {
     //             console.log(`⏳ No claimable balances. Waiting 1s...`);
     //             return
@@ -33,47 +35,47 @@ async function sendAlternatingOperations(po) {
     // Load account for transaction building
     const account = await server.loadAccount(senderPublic);
     const baseFee = await server.fetchBaseFee();
-
+    console.log("account:"+account)
   
 
-    const maxOperations = 20;
-    const txBuilder = new StellarSdk.TransactionBuilder(account, {
-      fee: baseFee ,
-      networkPassphrase: 'Pi Network',
-    });
+    // const maxOperations = 20;
+    // const txBuilder = new StellarSdk.TransactionBuilder(account, {
+    //   fee: baseFee ,
+    //   networkPassphrase: 'Pi Network',
+    // });
 
-    let claimIndex = 0;
-    let paymentCount = 0;
+    // let claimIndex = 0;
+    // let paymentCount = 0;
 
-    for (let i = 0; i < maxOperations; i++) {
-      if (i % 2 === 0 && claimIndex < 20) {
-        // even index: claim operation
-        txBuilder.addOperation(StellarSdk.Operation.claimClaimableBalance({
-          balanceId: claimables[0].id,
-        }));
-         console.log(`✅ Claim added: ${claimables[0].id}`);
-        claimIndex++;
-      } else {
-        // odd index বা claimable শেষ হলে payment
-        txBuilder.addOperation(StellarSdk.Operation.payment({
-          destination: recipientAddress,
-          asset: StellarSdk.Asset.native(),
-          amount: '971',
-        }));
-        paymentCount++;
-        console.log(`💸 Payment operation added: ${recipientAddress}`);
-      }
-    }
+    // for (let i = 0; i < maxOperations; i++) {
+    //   if (i % 2 === 0 && claimIndex < 20) {
+    //     // even index: claim operation
+    //     txBuilder.addOperation(StellarSdk.Operation.claimClaimableBalance({
+    //       balanceId: claimables[0].id,
+    //     }));
+    //      console.log(`✅ Claim added: ${claimables[0].id}`);
+    //     claimIndex++;
+    //   } else {
+    //     // odd index বা claimable শেষ হলে payment
+    //     txBuilder.addOperation(StellarSdk.Operation.payment({
+    //       destination: recipientAddress,
+    //       asset: StellarSdk.Asset.native(),
+    //       amount: '971',
+    //     }));
+    //     paymentCount++;
+    //     console.log(`💸 Payment operation added: ${recipientAddress}`);
+    //   }
+    // }
 
-    const tx = txBuilder.setTimeout(30).build();
-    tx.sign(senderKeypair);
+    // const tx = txBuilder.setTimeout(30).build();
+    // tx.sign(senderKeypair);
 
-    const result = await server.submitTransaction(tx);
-    console.log(`✅ Transaction সফল! Hash: ${result.hash}`);
-    console.log(`📦 Claim operations: ${claimIndex}, 💸 Payment operations: ${paymentCount}`);
-  } catch (err) {
-    console.error('Error:', err.response?.data?.extras?.result_codes || err.message || err);
-  }
+  //  const result = await server.submitTransaction(tx);
+  //   console.log(`✅ Transaction সফল! Hash: ${result.hash}`);
+  //   console.log(`📦 Claim operations: ${claimIndex}, 💸 Payment operations: ${paymentCount}`);
+  // } catch (err) {
+  //   console.error('Error:', err.response?.data?.extras?.result_codes || err.message || err);
+  // }
 }
 
 
