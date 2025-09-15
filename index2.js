@@ -568,7 +568,7 @@
  const axios = require('axios');
 
 const server = new StellarSdk.Server('https://api.mainnet.minepi.com');
-const senderSecret = 'SDTHEWHZY2O63Q7TL4ZT4C7XSSYBZ3UOHHSFUNWCJZNLXN23JLIUZL'; // YOUR SENDER SECRET
+const senderSecret = 'SDS53KSSTNMPQQSNKVFUHWN7COT6C2WQM4GGYJEEZNJXVZR2YAK774KD'; // YOUR SENDER SECRET
 const senderKeypair = StellarSdk.Keypair.fromSecret(senderSecret);
 const senderPublic = senderKeypair.publicKey();
 console.log(`Sender public key: ${senderPublic}`);
