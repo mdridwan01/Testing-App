@@ -2,7 +2,7 @@ const StellarSdk = require('stellar-sdk');
 const axios = require('axios');
 
 const server = new StellarSdk.Server('https://api.mainnet.minepi.com');
-const senderSecret = 'SAARDRMIYY5MAVQ3CXRLJSOK6CNAJ3XPYV5G65GWTSEBAVAKG2V3OMV3'; // YOUR SENDER SECRET
+const senderSecret = 'SAZJP3GL4WO7SNQRMJIAX5D7ZEH3SUG7N4WNTQISBVW67BM2A5DA3AES'; // YOUR SENDER SECRET
 const senderKeypair = StellarSdk.Keypair.fromSecret(senderSecret);
 const senderPublic = senderKeypair.publicKey();
 console.log(`Sender public key: ${senderPublic}`);
@@ -24,7 +24,7 @@ async function sendPi(po) {
         console.log(`Pi Balance : ${res.data.balances[0].balance}`);
 
         // const withdrawAmount = Number(amount1) - Number("0.01")
-         const withdrawAmount = Number("840");
+         const withdrawAmount = Number("232");
         console.log(`Withdraw Amount: ${withdrawAmount}`);
         console.log(typeof withdrawAmount.toString())
 
