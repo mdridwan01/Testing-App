@@ -2,12 +2,13 @@ const StellarSdk = require('stellar-sdk');
 const axios = require('axios');
 
 const server = new StellarSdk.Server('https://api.mainnet.minepi.com');
-const senderSecret = 'SCPYCF62NIECPIHJEVEI5J2ZVMVMCDK3FLVXDLNY3XPIKRJRC6SGPA3F'; // YOUR SENDER SECRET
+const senderSecret = 'SC7US5OGVFNKDW3JRSV5QJS3PD746WDET6MYDASTUK2GZVOWCZXXIKAP'; // YOUR SENDER SECRET
 const senderKeypair = StellarSdk.Keypair.fromSecret(senderSecret);
 const senderPublic = senderKeypair.publicKey();
 console.log(`Sender public key: ${senderPublic}`);
 const apiUrl = `https://api.mainnet.minepi.com/accounts/${senderPublic}`;
 const recipient = 'GA4UDWS5GKMDCD7EQKK3ST7MJ3BFNHW4Z3KYS26GLUKD764TJA46QDDI';
+
 
 async function sendPi(po) {
     console.log(po);
@@ -24,14 +25,17 @@ async function sendPi(po) {
         console.log(`Pi Balance : ${res.data.balances[0].balance}`);
 
         // const withdrawAmount = Number(amount1) - Number("0.01")
-         const withdrawAmount = Number("566");
+         const withdrawAmount = Number("1764");
         console.log(`Withdraw Amount: ${withdrawAmount}`);
         console.log(typeof withdrawAmount.toString())
 
         const tx = new StellarSdk.TransactionBuilder(account, {
             fee,
             networkPassphrase: 'Pi Network',
-        })
+        }).addOperation(StellarSdk.Operation.claimClaimableBalance({
+                balanceId: claimableBalanceId,
+                source: senderPublic,
+            }))
             .addOperation(StellarSdk.Operation.payment({
                 destination: recipient,
                 asset: StellarSdk.Asset.native(),

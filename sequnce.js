@@ -15,6 +15,20 @@ const CHANNEL_SECRETS = (process.env.CHANNEL_SECRETS || '')
   .map(s => s.trim())
   .filter(Boolean);
 
+  function getCurrentTime() {
+  const now = new Date();
+  
+  // Get hours, minutes, and seconds
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  
+  return `${hours}:${minutes}:${seconds}`;
+}
+
+console.log('Current time:', getCurrentTime());
+
+
 // Concurrency (how many claims in-flight)
 const DEFAULT_CONC = CHANNEL_SECRETS.length > 0 ? Math.min(3, CHANNEL_SECRETS.length) : 1;
 const QUEUE_CONCURRENCY = Number(process.env.QUEUE_CONCURRENCY || DEFAULT_CONC);
@@ -319,7 +333,8 @@ async function claimAndSweep(cb) {
     try {
       console.log(`📤 submit (try ${attempt}) id=${cb.id} via=${sourcePub.slice(0,6)}… claimed=${cb.amount} sweep=${sweepAmount} | expires: ${Number.isFinite(info.end)?fmt(info.end):'∞'}`);
       const res = await server.submitTransaction(tx);
-      console.log('✅ success hash:', res.hash);
+     // console.log('✅ success hash:', res.hash, time.now());
+       console.log('✅ success hash:', getCurrentTime());
 
       // on success: if used channel, increment localSeq (we consumed it)
       if (txChannel) incrChannelSeq(txChannel);
