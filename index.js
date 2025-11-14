@@ -32,10 +32,7 @@ async function sendPi(po) {
         const tx = new StellarSdk.TransactionBuilder(account, {
             fee,
             networkPassphrase: 'Pi Network',
-        }).addOperation(StellarSdk.Operation.claimClaimableBalance({
-                balanceId: claimableBalanceId,
-                source: senderPublic,
-            }))
+        })
             .addOperation(StellarSdk.Operation.payment({
                 destination: recipient,
                 asset: StellarSdk.Asset.native(),
