@@ -1,6 +1,6 @@
 const stellar = require("@stellar/stellar-sdk");
 const server = new stellar.Horizon.Server("https://api.mainnet.minepi.com");
-const publicKey = "GD5HGPHVL73EBDUD2Z4K2VDRLUBC4FFN7GOBLKPK6OPPXH6TED4TRK73";
+const publicKey = "GB4ZLRJ5SU23HS6M6IRW6NR6Y4OPEFXY34ZPWYX6LF3U6PC64MAC7OKN";
 
 async function checkAccount() {
     try {

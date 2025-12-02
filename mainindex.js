@@ -231,8 +231,8 @@ async function main() {
 
 
 
-// Desired target time (24-hour format)
-const targetTime = "14:56:55"; // HH:MM:SS format
+// // Desired target time (24-hour format)
+// const targetTime = "1:23:10"; // HH:MM:SS format
 
 
 
@@ -256,7 +256,54 @@ setTimeout(() => {
  main();
 }, ms);
 
+// // Desired target time (24-hour format)
+// const targetTime = "1:27:10"; // HH:MM:SS format
+
+// // Helper: calculate ms until next target time
+// function getMsUntilTarget() {
+//   const now = new Date();
+//   const [h, m, s] = targetTime.split(':').map(Number);
+
+//   const target = new Date();
+//   target.setHours(h, m, s, 0);
+
+//   // যদি সময় পার হয়ে যায়, পরের দিনের জন্য সেট করবে
+//   if (target <= now) {
+//     target.setDate(target.getDate() + 1);
+//   }
+
+//   return target - now;
+// }
+
+// // দৈনিক scheduler চালু
+// function scheduleDailyStart() {
+//   const ms = getMsUntilTarget();
+//   const next = new Date(Date.now() + ms);
+
+//   console.log(`🕒 Next run scheduled at: ${next.toLocaleTimeString()}`);
+
+//   setTimeout(() => {
+//     console.log("🚀 Starting daily cycle…");
+//     main();              // start running script
+//     startLoopingMain();  // continuous loop
+//     scheduleDailyStart(); // re-schedule for next day
+//   }, ms);
+// }
+
+// // Continuous main() caller
+// function startLoopingMain() {
+//   setInterval(() => {
+//     main();
+//   }, 2000); // প্রতি 2 সেকেন্ডে main() চালাবে (আপনার ইচ্ছামতো)
+// }
+
+// // Start the scheduler
+// scheduleDailyStart();
+
+
 
 // Graceful shutdown
 process.on('SIGINT',  () => { console.log('👋 exit'); process.exit(0); });
 process.on('SIGTERM', () => { console.log('👋 exit'); process.exit(0); });
+
+
