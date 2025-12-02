@@ -232,7 +232,7 @@ async function main() {
 
 
 // // Desired target time (24-hour format)
- const targetTime = "1:40:10"; // HH:MM:SS format
+ const targetTime = "1:46:00"; // HH:MM:SS format
 
 
 
